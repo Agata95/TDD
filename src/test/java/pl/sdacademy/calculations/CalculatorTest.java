@@ -1,15 +1,24 @@
 package pl.sdacademy.calculations;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
 
+    private Calculator calculator;
+
+    // wykonuje się przed każdym testem
+    @BeforeEach
+    void setUp() {
+        calculator = new Calculator();
+    }
+
     @Test
     void shouldAddTwoNumbers() {
         // given - warunki początkowe
-        final Calculator calculator = new Calculator();
+//        final Calculator calculator = new Calculator();
         final double numA = 2;
         final double numB = 3;
         // dodajemy final, gdy jesteśmy pewni, że referencje się nie zmienią
@@ -24,7 +33,7 @@ class CalculatorTest {
     @Test
     void shouldSubtractTwoNumbers() {
         // given - warunki początkowe
-        final Calculator calculator = new Calculator();
+//        final Calculator calculator = new Calculator();
         final double numA = 2.5;
         final double numB = 3.8;
 
@@ -38,7 +47,7 @@ class CalculatorTest {
     @Test
     void shouldMultiplyTwoNumbers() {
         // given
-        final Calculator calculator = new Calculator();
+//        final Calculator calculator = new Calculator();
         final double numA = 2.1;
         final double numB = 3.0;
 
