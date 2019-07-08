@@ -76,9 +76,22 @@ class DatabaseStoreTest {
         assertIterableEquals(Collections.singletonList(valueToInsertC), actualValues);
     }
 
-    // w domu:
-    // test dla clean - gdy w bazie jest coś
-    // removeData - usunąć nieistniejący element
-    // removeData - bez argumentów
-    // addData - bez argumentów
+    @Test
+    void shouldCleanWhenDatabaseIsNotEmpty() {
+        final String value = "someValue";
+        databaseStore.addData(value);
+
+        databaseStore.clean();
+
+        final List<String> actualValues = databaseStore.getData();
+        assertTrue(actualValues.isEmpty());
+    }
+
+    @Test
+    void shouldRemoveValueWhenDatabaseIsEmpty(){
+        databaseStore.removeData();
+        final List<String> actualValues = databaseStore.getData();
+
+        assertTrue(actualValues.isEmpty());
+    }
 }
