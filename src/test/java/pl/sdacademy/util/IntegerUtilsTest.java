@@ -33,7 +33,9 @@ class IntegerUtilsTest {
 //        assertTrue(filtered.contains(1));
 //        assertTrue(filtered.contains(2));
 //        assertTrue(filtered.contains(3));
+        // gdy występuje błąd, to nie wiadomo z którego assert'u
 
+        // sposób drugi - lepszy :
         assertAll(
                 () -> assertFalse(filtered.isEmpty()),
                 () -> assertEquals(3, filtered.size()),
