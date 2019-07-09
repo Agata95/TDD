@@ -9,6 +9,10 @@ import java.util.stream.Stream;
 public class FibonacciArgumentsProvider implements ArgumentsProvider {
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
-        return null;
+        return Stream.of(
+                Arguments.of(1, 1),
+                Arguments.of(5, 5),
+                Arguments.of(15, 610)
+        );
     }
 }
