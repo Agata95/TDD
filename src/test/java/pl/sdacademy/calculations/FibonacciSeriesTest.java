@@ -48,10 +48,10 @@ class FibonacciSeriesTest {
 
     @ParameterizedTest
     @ArgumentsSource(FibonacciArgumentsProvider.class)
-    void shouldCalculateValueIndex(final int index, final long expectedVallue) {
+    void shouldCalculateValueIndex(final int index, final long expectedValue) {
         final long result = fibonacciSeries.compute(index);
 
-        assertThat(result).isEqualTo(expectedVallue);
+        assertThat(result).isEqualTo(expectedValue);
     }
 
 }
