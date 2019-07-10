@@ -2,7 +2,9 @@ package pl.sdacademy.calculations;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.sdacademy.exceptions.DivisionByZeroException;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
@@ -13,6 +15,26 @@ class CalculatorTest {
     @BeforeEach
     void setUp() {
         calculator = new Calculator();
+    }
+
+    /**
+     * Testowanie wyjątków - JUnit - try catch
+     */
+
+    @Test
+    void shouldThrowExceptionWhenDevideByZero() {
+        final double numA = 5.0;
+        final double numB = 0.0;
+
+        try {
+            calculator.divide(numA, numB);
+            fail("Exception not thrown");
+        } catch (final DivisionByZeroException e) {
+            assertThat(e.getMessage())
+                    .isEqualTo("Cannot divide by 0!");
+            assertThat(e)
+                    .hasNoCause();
+        }
     }
 
     @Test

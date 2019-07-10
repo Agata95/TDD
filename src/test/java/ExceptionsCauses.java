@@ -10,7 +10,7 @@ public class ExceptionsCauses {
     try {
       methodThatThrowsExceptionA();
     } catch (ExceptionA exceptionA) {
-      exceptionA.printStackTrace();
+//      exceptionA.printStackTrace();
       throw new ExceptionB("Throwing B", exceptionA);
     }
   }

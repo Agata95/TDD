@@ -12,6 +12,35 @@ class FibonacciSeriesTest {
     private final FibonacciSeries fibonacciSeries = new FibonacciSeries();
 
     /**
+     * Testowanie wyjątków - assertThrows
+     */
+
+    @Test
+    void shouldThrowExceptionWhenNonPositiveIndex() {
+        final int index = -1;
+
+        final Throwable exp = assertThrows(IllegalArgumentException.class,
+                () -> fibonacciSeries.compute(index));
+
+        assertThat(exp)
+                .hasMessageContaining("Index has to be positive")
+                .hasNoCause();
+    }
+
+    @Test
+    void shouldThrowExceptionWhenIndexIsEqualZero() {
+        final int index = 0;
+
+        final Throwable exp = assertThrows(IllegalArgumentException.class,
+                () -> fibonacciSeries.compute(index));
+
+        assertThat(exp)
+                .hasMessageContaining("Index has to be positive")
+                .extracting(Throwable::getCause)
+                .isNull();
+    }
+
+    /**
      * Testy jednostkowe - trzy podpunkty
      */
 
