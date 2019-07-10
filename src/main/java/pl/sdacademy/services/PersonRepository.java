@@ -49,7 +49,8 @@ public class PersonRepository {
 
     public List<Person> getPersonsWithPolishEmail() {
         return personList.stream()
-                .filter(person -> person.getEmail().contains(".pl"))
+                .filter(person -> person.getEmail()
+                        .contains(".pl"))
                 .collect(Collectors.toList());
     }
 }

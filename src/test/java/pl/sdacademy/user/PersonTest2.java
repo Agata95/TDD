@@ -42,4 +42,16 @@ class PersonTest2 {
                 .hasMessage("Age has to be positive")
                 .hasNoCause();
     }
+
+    @Test
+    void shouldThrowExceptionSetPersonDetailsWithNull() {
+        final Integer age = null;
+
+        final PersonUpdateFailedException exp = assertThrows(PersonUpdateFailedException.class,
+                () -> person.setPersonDetails("", age));
+
+        assertThat(exp)
+                .hasMessage("Age has to be positive")
+                .hasNoCause();
+    }
 }
