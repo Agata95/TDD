@@ -1,13 +1,17 @@
 package pl.sdacademy.database;
 
 import org.junit.jupiter.api.*;
+import pl.sdacademy.exceptions.DatabaseStoreException;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DatabaseStoreTest {
@@ -18,7 +22,6 @@ class DatabaseStoreTest {
     @BeforeAll
     static void setUpTestCase() {
         databaseConnection = new DatabaseConnection();
-        databaseConnection.open();
     }
 
     @AfterAll
@@ -30,6 +33,7 @@ class DatabaseStoreTest {
     void setUp() {
         databaseStore = new DatabaseStore(databaseConnection);
         System.out.println("Starting next test");
+        databaseConnection.open();
     }
 
     @AfterEach
@@ -88,10 +92,41 @@ class DatabaseStoreTest {
     }
 
     @Test
-    void shouldRemoveValueWhenDatabaseIsEmpty(){
+    void shouldRemoveValueWhenDatabaseIsEmpty() {
         databaseStore.removeData();
         final List<String> actualValues = databaseStore.getData();
 
         assertTrue(actualValues.isEmpty());
+    }
+
+    /**
+     * Testowanie wyjątków - assertThatThrownBy
+     */
+
+    @Test
+    void shouldThrowExceptionWhenAddingDataAndConnectionsIsClosed() {
+        final String value = "someValue";
+        databaseConnection.close();
+
+        assertThatThrownBy(
+                () -> databaseStore.addData(value))
+                .hasMessage("Connection is not opened. Cannot add data");
+    }
+
+    /**
+     * Testowanie wyjątków - assertThatExceptionOfType
+     */
+
+    @Test
+    void shouldThrowExceptionWhenRemovingDataAndConnectionsIsClosed() {
+        final String value = "someValue";
+        databaseConnection.close();
+
+        assertThatExceptionOfType(DatabaseStoreException.class)
+                .isThrownBy(() -> databaseStore.removeData())
+                .withMessage("Connection is not opened. Cannot remove data")
+                .withNoCause();
+
+
     }
 }
