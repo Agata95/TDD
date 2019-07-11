@@ -30,6 +30,7 @@ class PersonServiceTest {
 
     @BeforeEach
     void setUp() {
+        // zakomentujemy to aby działał Mockito
 //        personRepository = new PersonRepository();
         personService = new PersonService(personRepository);
     }
@@ -77,12 +78,18 @@ class PersonServiceTest {
 
     @Test
     void shouldNotFindByNonExistingEmail() {
-        final String email = "jakisEmail@gmail.com";
+        final String email = "jakisEmailKtoregoNieMaNaLiscie@gmail.com";
+        // tworzę listę jakiegoś człowieka, który nie zawiera takiego emaila jak powyżej
+        when(personRepository.getPersonList()).thenReturn(
+                Collections.singletonList(
+                        new Person("Jan", "Jankowski", "asd@gmail.com", 18))
+        );
 
         final Optional<Person> foundPerson = personService.findByEmail(email);
 
         assertThat(foundPerson)
                 .isNotPresent();
+        verify(personRepository).getPersonList();
     }
 
     /**
