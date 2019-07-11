@@ -20,6 +20,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+// w JUnit4: @RunWith(MockitoJunitRunner.class)
 class PersonServiceTest {
 
     private PersonService personService;
@@ -36,7 +37,7 @@ class PersonServiceTest {
     }
 
     /**
-     * Testy jednostkowe dla dwóch metod -> przypadki pozytywne i niegatywne
+     * Testy jednostkowe dla dwóch metod -> przypadki pozytywne i niegatywne (jeden z wyjątkiem)
      * z wykorzystaniem Mockito
      */
 
