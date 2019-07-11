@@ -3,6 +3,7 @@ package pl.sdacademy.services;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.sdacademy.exceptions.PersonActionException;
@@ -23,18 +24,20 @@ import static org.mockito.Mockito.when;
 // w JUnit4: @RunWith(MockitoJunitRunner.class)
 class PersonServiceTest {
 
+    @InjectMocks    // na starcie do tej klasy są wstrzykiwane wszystkie mocki do konstruktora wszystkie zależności
+    // np. -> PersonRepository personRepository, teraz @BeforeEach nie jest nam potrzebny
     private PersonService personService;
 
     // mockuje obiekt z klasy, która posiada baze danych, których nie muszę znać do testowania
     @Mock
     private PersonRepository personRepository; // = Mockito.mock(PersonRepository.class)
 
-    @BeforeEach
-    void setUp() {
-        // zakomentujemy to aby działał Mockito
+//    zakomentujemy to aby działał Mockito
+//    @BeforeEach
+//    void setUp() {
 //        personRepository = new PersonRepository();
-        personService = new PersonService(personRepository);
-    }
+//        personService = new PersonService(personRepository);
+//    }
 
     /**
      * Testy jednostkowe dla dwóch metod -> przypadki pozytywne i niegatywne (jeden z wyjątkiem)

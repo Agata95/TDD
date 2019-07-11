@@ -10,7 +10,8 @@ public class PersonVerifier {
     private final NameVerifier nameVerifier;
     private final SurnameVerifier surnameVerifier;
 
-    public PersonVerifier(final AgeVerifier ageVerifier, final EmailVerifier emailVerifier, final NameVerifier nameVerifier, final SurnameVerifier surnameVerifier) {
+    public PersonVerifier(final AgeVerifier ageVerifier, final EmailVerifier emailVerifier,
+                          final NameVerifier nameVerifier, final SurnameVerifier surnameVerifier) {
         this.ageVerifier = ageVerifier;
         this.emailVerifier = emailVerifier;
         this.nameVerifier = nameVerifier;
